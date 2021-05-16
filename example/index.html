@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>viewModel Test</title>
+</head>
+<body>
+  <div id="app">
+    <h1>{{ title }}</h1>
+    <div>
+      Name: 
+      <input v-model="name" />
+    </div>
+    <p>Your input data: {{ name }} </p>
+    <button @click="changeData">Change Title Random</button>
+  </div>
+  <!-- <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script> -->
+  <script>
+    let app = null
+    async function init() {
+      let { default: Vue } = await import('../src/viewModel.js')
+
+      app = new Vue({
+        el: '#app',
+        data() {
+          return {
+            title: 'viewModel Test',
+            name: 'zhang san',
+          }
+        },
+        methods: {
+          changeData() {
+            this.title = (Math.random() * 1000000000)
+          }
+        }
+      })
+    }
+    init()
+  </script>
+</body>
+</html>
